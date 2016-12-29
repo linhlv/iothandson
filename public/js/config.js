@@ -1,6 +1,6 @@
 materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/");
 
 
         $stateProvider
@@ -10,7 +10,7 @@ materialAdmin
             //------------------------------
 
             .state ('home', {
-                url: '/home',
+                url: '/',
                 templateUrl: 'views/home.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
