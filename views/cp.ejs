@@ -26,8 +26,21 @@
     </head>
 
     <body data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1'}">
+        <header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
 
-        <data ui-view></data>
+        <section id="main">
+            <aside id="sidebar" data-ng-include="'/cp_sidebar'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+            <aside id="chat" data-ng-include="'template/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+            <section id="content">
+                <div class="container">
+                    <data ui-view></data>
+                </div>
+            </section>
+        </section>
+
+        <footer id="footer" data-ng-include="'template/footer.html'"></footer>        
 
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>

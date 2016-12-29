@@ -1,17 +1,23 @@
 materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/connections/list");
 
 
         $stateProvider
-        
+            //------------------------------
+            // CONNECTIONS
+            //------------------------------
+            .state ('connections', {
+                url: '/connections',
+                templateUrl: 'views/connections.html'
+            })
+
             //------------------------------
             // HOME
             //------------------------------
-
-            .state ('home', {
-                url: '/',
-                templateUrl: 'views/home.html',
+            .state ('connections.list', {
+                url: '/list',
+                templateUrl: 'views/connections.list.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
@@ -34,6 +40,15 @@ materialAdmin
                         ])
                     }
                 }
+            })
+
+            //------------------------------
+            // CONNECTIONS.ADD
+            //------------------------------
+            .state ('connections.edit', {
+                url: '/edit/:id',
+                templateUrl: 'views/connections.edit.html',
+                controller: 'connections.edit.ctrl as vm'
             })
 
 

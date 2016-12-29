@@ -7,5 +7,12 @@ var materialAdmin = angular.module('materialAdmin', [
     'oc.lazyLoad',
     'nouislider',
     'ngTable'
-])
+]);
+
+materialAdmin.controller('connections.edit.ctrl', ['$state',function($state){
+    var vm = this;
+    vm.go = function(state){
+        $state.go(state);
+    }
+}])
  
