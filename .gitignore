@@ -7,6 +7,8 @@ logs
 *.log
 npm-debug.log*
 
+logfile.txt
+
 # Runtime data
 pids
 *.pid

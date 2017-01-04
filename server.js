@@ -13,6 +13,8 @@ var logger 			= require('express-logger');
 var cookieParser 	= require('cookie-parser');
 var bodyParser 		= require('body-parser');
 var session 		= require('express-session');
+var MongoClient 	= require('mongodb').MongoClient;
+var assert 			= require('assert');
 
 var configDB = require('./config/database.js');
 
@@ -33,22 +35,16 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-
-/*
-app.configure(function() {
-
-	// set up our express application
-	
-
-});
-*/
-
 /* Load static */
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('dbConnectUrl', configDB.url);
+app.set('mongoClient', MongoClient);
 
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
 
 // launch ======================================================================
 app.listen(port);
