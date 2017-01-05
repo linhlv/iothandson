@@ -31,8 +31,13 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
             console.log(response);         
             $scope.f.$setSubmitted(false);           
         }, function errorCallback(response) {
-            console.log(response);        
-            $scope.f.$setSubmitted(false);    
+            swal({
+                title: "Creating connection with errors!",   
+                text: "You may entered incorrect information, please check again!",   
+                type: "error"
+            }, function(){
+                $scope.f.$setSubmitted(false);                    
+            });   
         });   
     };
 }])

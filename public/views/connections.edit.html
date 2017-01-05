@@ -39,7 +39,7 @@
                         <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.port.$touched || f.$submitted) && f.port.$invalid, 'zmdi-check': (f.port.$touched || f.$submitted) && f.port.$valid }" data-ng-if="f.port.$touched || f.$submitted"></span>
                     </div>
                 </div>
-            </div>
+            </div>          
             <div class="row">     
                 <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback" data-ng-class="{'has-error': (f.username.$touched || f.$submitted) && f.username.$error.required, 'has-success': (f.username.$touched || f.$submitted) && !f.username.$error.required }">
@@ -68,6 +68,7 @@
                 <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group">                    
                         <button type="submit" class="btn btn-primary btn-sm m-t-5">Save</button>
+                        <button type="button" class="btn btn bgm-gray btn-sm m-t-5" data-ng-click="vm.test()">Test Connection</button>
                         <button type="button" class="btn btn btn-success btn-sm m-t-5" data-ng-click="vm.go('connections.list')">Cancel</button>
                     </div>
                 </div>

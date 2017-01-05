@@ -26,6 +26,14 @@ module.exports = function(app, passport, isLoggedIn) {
 				req.checkBody('password', 'Password is required').notEmpty();
 
 				req.getValidationResult().then(function(result) {
+					res.send(
+						{
+							message: 'There have been validation errors'								
+						}, 400
+					);
+					return;
+
+					/*
 					if (!result.isEmpty()) {
 						res.send(
 							{
@@ -39,6 +47,7 @@ module.exports = function(app, passport, isLoggedIn) {
 					res.json({
 						clientID: req.body.clientID
 					});
+					*/
 				});       	
 			}
 		});		
