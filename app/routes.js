@@ -25,7 +25,9 @@ module.exports = function(app, passport) {
 		successRedirect : '/cp', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
-	}));
+	}), function(req, res){
+		console.log('login');
+	});
 
 	// =====================================
 	// SIGNUP ==============================
@@ -42,7 +44,6 @@ module.exports = function(app, passport) {
 	// =====================================
 	// show the signup form
 	app.get('/forgot', function(req, res) {
-
 		// render the page and pass in any flash data if it exists
 		res.render('forgot.ejs', { message: req.flash('signupMessage') });
 	});
