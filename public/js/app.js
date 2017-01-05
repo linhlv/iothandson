@@ -91,6 +91,7 @@ thingPanel.controller('panel.ctrl', ['$scope','$state', '$http', '$stateParams',
 
 thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
     var vm = this;
+    vm.radioModel = '0';
     console.log('List');
 }]);
 
