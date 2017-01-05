@@ -18,6 +18,7 @@ thingPanel
             .state ('connections.list', {
                 url: '/list',
                 templateUrl: 'views/connections.list.html',
+                controller: 'connections.list.ctrl as vm',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([

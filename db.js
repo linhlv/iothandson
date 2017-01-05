@@ -15,6 +15,19 @@ module.exports = function(mongoClient, dbConnectUrl) {
                     callback(result);                    
                 });
 		    });	            
+        },
+        findDocuments : function(documentName, query, callback) {
+            mongoClient.connect(dbConnectUrl, function(err, db){			
+                // Get the documents collection
+                var collection = db.collection(documentName);
+                // Find some documents
+                collection.find(query).toArray(function(err, docs) {
+                    assert.equal(err, null);
+                    console.log("Found the following records");
+                    console.log(docs)
+                    callback(docs);
+                });
+		    });	            
         }
     }    
 };

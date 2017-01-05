@@ -11,10 +11,15 @@ module.exports = function(app, passport, isLoggedIn) {
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	router.get('/', isLoggedIn, function(req, res) {
-		console.log(req.user);
+	router.get('/', isLoggedIn, function(req, res) {		
 		res.render('cp.ejs', {
 			user : req.user // get the user out of session and pass to template
+		});
+	});
+
+	router.get('/connections/', isLoggedIn, function(req, res) {
+		db.findDocuments('connections', {createdBy: req.user._id}, function(result){			
+			res.json(result);
 		});
 	});
 
@@ -43,7 +48,8 @@ module.exports = function(app, passport, isLoggedIn) {
 					port: req.body.port,
 					username: req.body.username,
 					password: req.body.password,
-					owner: req.user._id
+					createdBy: req.user._id,
+					createdOn: new Date()
 				}];
 				db.insertDocuments('connections', connections, function(result){
 					res.json(result);

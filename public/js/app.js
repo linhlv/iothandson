@@ -9,6 +9,23 @@ var thingPanel = angular.module('thingPanel', [
     'ngTable'
 ]);
 
+
+thingPanel.controller('connections.list.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
+    var vm = this;
+
+    var init  = function(){
+        $http({            
+            method: 'GET',
+            url: '/cp/connections/'
+        }).then(function successCallback(response) {
+            vm.list = response.data;            
+        }, function errorCallback(response) {}); 
+    }
+
+    init();      
+}]);
+ 
+
 thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
     var vm = this;
 
@@ -45,5 +62,5 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
             });   
         });   
     };
-}])
+}]);
  

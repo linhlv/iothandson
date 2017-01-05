@@ -1,11 +1,13 @@
 <div class="card">
     <div class="listview lv-bordered lv-lg">
         <div class="lv-body">
-            <div class="lv-item media">                         
+            <div class="lv-item media" data-ng-repeat="connection in vm.list">                         
                 <div class="media-body">
-                    <div class="lv-title">Dulla vel metus scelerisque ante sollicitudin commodo purus odio</div>
-                    <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
-
+                    <div class="lv-title" data-ng-bind="connection.server"></div>
+                    <small class="lv-small">Username: <span data-ng-bind="connection.username"></span>, Password: <span data-ng-bind="connection.password"></span></small>
+                    <ul class="lv-attrs">
+                        <li data-ng-if="connection.createdOn">Date Created: <span data-ng-bind="connection.createdOn|date:'yyyy-MM-dd HH:mm:ss'"></span></li>                        
+                    </ul>
                     <div class="lv-actions actions">
                         <a href="">
                             <i class="zmdi zmdi-more-vert"></i>
@@ -13,47 +15,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="lv-item media">                         
-                <div class="media-body">
-                    <div class="lv-title">Dulla vel metus scelerisque ante sollicitudin commodo purus odio</div>
-                    <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
-
-                    <div class="lv-actions actions">
-                        <a href="">
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lv-item media">                         
-                <div class="media-body">
-                    <div class="lv-title">Dulla vel metus scelerisque ante sollicitudin commodo purus odio</div>
-                    <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
-
-                    <div class="lv-actions actions">
-                        <a href="">
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lv-item media">                         
-                <div class="media-body">
-                    <div class="lv-title">Dulla vel metus scelerisque ante sollicitudin commodo purus odio</div>
-                    <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
-
-                    <div class="lv-actions actions">
-                        <a href="">
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>                
-            
-
         </div>
     </div>
 </div>
