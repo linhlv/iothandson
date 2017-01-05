@@ -9,10 +9,10 @@
                         <li data-ng-if="connection.createdOn">Date Created: <span data-ng-bind="connection.createdOn|date:'yyyy-MM-dd HH:mm:ss'"></span></li>                        
                     </ul>
                     <div class="lv-actions actions">                        
-                        <a href="" data-ng-click="vm.remove(connection._id)">
+                        <a href="" data-ng-click="vm.remove(connection._id)" popover="Remove" popover-placement="bottom" popover-trigger="mouseenter">
                             <i class="zmdi zmdi-delete"></i>
                         </a>
-                        <a href="" data-ng-click="vm.open(connection._id)">
+                        <a href="" data-ng-click="vm.open(connection._id)" popover="Panel" popover-placement="bottom" popover-trigger="mouseenter">
                             <i class="zmdi zmdi-tv-list"></i>
                         </a>
                     </div>

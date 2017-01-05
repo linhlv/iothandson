@@ -2,7 +2,7 @@ var thingPanel = angular.module('thingPanel', [
     'ngAnimate',
     'ngResource',
     'ui.router',
-    'ui.bootstrap',
+    'ui.bootstrap',    
     'angular-loading-bar',
     'oc.lazyLoad',
     'nouislider',
@@ -75,9 +75,21 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
 }]);
 
 
-thingPanel.controller('panel.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
+thingPanel.controller('panel.ctrl', ['$scope','$state', '$http', '$stateParams',function($scope, $state, $http, $stateParams){
     var vm = this;
-    console.log('Panel');
+    console.log('Panel:', $stateParams.connectionId);
+     var init  = function(){
+        $http({            
+            method: 'GET',
+            url: '/cp/connections/' + $stateParams.connectionId
+        }).then(function successCallback(response) {
+            console.log(response);
+        }, function errorCallback(response) {
+            console.log(response);
+        }); 
+    };
+
+    init(); 
 }]);
 
 thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){

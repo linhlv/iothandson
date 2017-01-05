@@ -19,6 +19,17 @@ thingPanel
             right: false
         }
 
+        this.contextAddNav = function(){
+            if($state && $state.current){
+                if($state.current.name.indexOf('connections.') >= 0){
+                    $state.go('connections.edit', {id:0});
+                }
+                else if($state.current.name.indexOf('panel.') >= 0){
+                    $state.go('panel.edit', {id:0});
+                }                
+            }            
+        };
+
         // By default template has a boxed layout
         this.layoutType = localStorage.getItem('ma-layout-status');
         

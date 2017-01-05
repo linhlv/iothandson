@@ -1,5 +1,7 @@
-module.exports = function(mongoClient, dbConnectUrl) {
+module.exports = function(mongoClient, dbConnectUrl) {    
     var assert = require('assert');
+    var ObjectId = require('mongodb').ObjectID;
+
     return {
         insertDocuments : function(documentName, data, callback) {
             mongoClient.connect(dbConnectUrl, function(err, db){			
@@ -22,9 +24,22 @@ module.exports = function(mongoClient, dbConnectUrl) {
                 var collection = db.collection(documentName);
                 // Find some documents
                 collection.find(query).toArray(function(err, docs) {
-                    assert.equal(err, null);
-                    console.log("Found the following records");                    
+                    assert.equal(err, null);   
+                    db.close();            
                     callback(docs);
+                });
+		    });	            
+        },        
+        findOne : function(documentName, id, callback) {
+            mongoClient.connect(dbConnectUrl, function(err, db){			
+                // Get the documents collection
+                var collection = db.collection(documentName);
+                
+                collection.find({_id: ObjectId(id.toString())}).toArray(function(err, items) {
+                    console.log(err, items);
+                    //assert.equal(err, null);                    
+                    db.close();                 
+                    callback(items);
                 });
 		    });	            
         }

@@ -30,9 +30,6 @@
 
         <section id="main">
             <aside id="sidebar" data-ng-include="'/cp_sidebar'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
-
-            <aside id="chat" data-ng-include="'template/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
-
             <section id="content">
                 <div class="container">
                     <data ui-view></data>
