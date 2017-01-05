@@ -17,8 +17,7 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
     };
 
     vm.save = function(){             
-        if(!$scope.f.$valid){ 
-            //invalid          
+        if(!$scope.f.$valid){             
             $scope.f.$setSubmitted(false);     
             return;            
         }
@@ -28,8 +27,14 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
             method: 'POST',
             url: '/cp/connections/'
         }).then(function successCallback(response) {
-            console.log(response);         
-            $scope.f.$setSubmitted(false);           
+            swal({
+                title: "Created connection successfully!",   
+                text: "You are welcome to be Vietnam Urban Farmers user!",   
+                type: "success"
+            }, function(){
+                $scope.f.$setSubmitted(false);   
+                $state.go('connections.list');                 
+            });              
         }, function errorCallback(response) {
             swal({
                 title: "Creating connection with errors!",   

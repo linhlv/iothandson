@@ -38,10 +38,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 /* Load static */
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.set('dbConnectUrl', configDB.url);
-app.set('mongoClient', MongoClient);
-
+app.set('db', require('./db')(MongoClient, configDB.url));
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport

@@ -2,8 +2,9 @@
 // app/routes.js
 module.exports = function(app, passport, isLoggedIn) {
     var express = require('express');
-    var router = express.Router();   
-	var util = require('util'); 
+    var router 	= express.Router();   
+	var util 	= require('util'); 
+	var db 		= app.get('db');
     
 	// =====================================
 	// CP SECTION =========================
@@ -17,40 +18,37 @@ module.exports = function(app, passport, isLoggedIn) {
 	});
 
 	router.post('/connections/', isLoggedIn, function(req, res) {
-		app.get('mongoClient').connect(app.get('dbConnectUrl'), function(err, db){			
-			if(req && req.body){
-				req.checkBody('clientID', 'Client ID is required').notEmpty();
-				req.checkBody('server', 'Server is required').notEmpty();
-				req.checkBody('port', 'Port is required as an integer').notEmpty().isInt();
-				req.checkBody('username', 'Username is required').notEmpty();
-				req.checkBody('password', 'Password is required').notEmpty();
+		if(req && req.body){
+			req.checkBody('clientID', 'Client ID is required').notEmpty();
+			req.checkBody('server', 'Server is required').notEmpty();
+			req.checkBody('port', 'Port is required as an integer').notEmpty().isInt();
+			req.checkBody('username', 'Username is required').notEmpty();
+			req.checkBody('password', 'Password is required').notEmpty();
 
-				req.getValidationResult().then(function(result) {
+			req.getValidationResult().then(function(result) {
+				if (!result.isEmpty()) {
 					res.send(
 						{
-							message: 'There have been validation errors'								
+							message: 'There have been validation errors',
+							errors: result.array()
 						}, 400
 					);
 					return;
+				}
 
-					/*
-					if (!result.isEmpty()) {
-						res.send(
-							{
-								message: 'There have been validation errors',
-								errors: result.array()
-							}, 400
-						);
-						return;
-					}
+				var connection = [{
+					clientID: req.body.clientID,
+					server: req.body.server,
+					port: req.body.port,
+					username: req.body.username,
+					password: req.body.password
+				}];
 
-					res.json({
-						clientID: req.body.clientID
-					});
-					*/
-				});       	
-			}
-		});		
+				db.insertDocuments('connections', connection, function(result){
+					res.json(result);
+				});
+			});       	
+		}
 	});
 
     return router;
