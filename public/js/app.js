@@ -9,22 +9,31 @@ var thingPanel = angular.module('thingPanel', [
     'ngTable'
 ]);
 
-thingPanel.controller('connections.edit.ctrl', ['$state', '$http',function($state, $http){
+thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
     var vm = this;
+
     vm.go = function(state){
         $state.go(state);
     };
 
-    vm.save = function(){        
+    vm.save = function(){             
+        if(!$scope.f.$valid){ 
+            //invalid          
+            $scope.f.$setSubmitted(false);     
+            return;            
+        }
+
         $http({
             data: vm.data,
             method: 'POST',
             url: '/cp/connections/'
         }).then(function successCallback(response) {
-            console.log(response);            
+            console.log(response);         
+            $scope.f.$setSubmitted(false);           
         }, function errorCallback(response) {
-            console.log(response);
-        });
+            console.log(response);        
+            $scope.f.$setSubmitted(false);    
+        });   
     };
 }])
  

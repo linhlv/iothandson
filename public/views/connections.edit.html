@@ -3,39 +3,64 @@
         <h2>CREATE</h2>
     </div>
     <div class="card-body card-padding">
-        <form data-ng-submit="vm.save()">
-            <div class="row">           
+        <form name="f" data-ng-submit="vm.save()" novalidate>
+            <div class="row">     
                 <div class="col-log-4 col-sm-6 col-xs-12">
-                    <div class="fg-line form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Client ID" data-ng-model="vm.data.clientID">
+                    <div class="form-group has-feedback" data-ng-class="{'has-error': (f.clientID.$touched || f.$submitted) && f.clientID.$error.required, 'has-success': (f.clientID.$touched || f.$submitted) && !f.clientID.$error.required }">
+                        <!--<label class="control-label" for="inputError2">Client ID</label>-->
+                        <div class="fg-line">                            
+                            <input type="text" name="clientID" class="form-control input-sm" placeholder="Client ID" data-ng-model="vm.data.clientID" required>      
+                            <small class="help-block" data-ng-if="(f.clientID.$touched || f.$submitted) && f.clientID.$error.required">Client ID is required.</small>                                        
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.clientID.$touched || f.$submitted) && f.clientID.$invalid, 'zmdi-check': (f.clientID.$touched || f.$submitted) && f.clientID.$valid }" data-ng-if="f.clientID.$touched || f.$submitted"></span>
                     </div>
                 </div>
             </div>
-            <div class="row">           
+            <div class="row">     
                 <div class="col-log-4 col-sm-6 col-xs-12">
-                    <div class="fg-line form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Server" data-ng-model="vm.data.server">
+                    <div class="form-group has-feedback" data-ng-class="{'has-error': (f.server.$touched || f.$submitted) && f.server.$error.required, 'has-success': (f.server.$touched || f.$submitted) && !f.server.$error.required }">
+                        <!--<label class="control-label" for="inputError2">Server</label>-->
+                        <div class="fg-line">                            
+                            <input type="text" name="server" class="form-control input-sm" placeholder="Server" data-ng-model="vm.data.server" required>      
+                            <small class="help-block" data-ng-if="(f.server.$touched || f.$submitted) && f.server.$error.required">Server is required.</small>                                        
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.server.$touched || f.$submitted) && f.server.$invalid, 'zmdi-check': (f.server.$touched || f.$submitted) && f.server.$valid }" data-ng-if="f.server.$touched || f.$submitted"></span>
                     </div>
                 </div>
             </div>
-            <div class="row">           
+            <div class="row">     
                 <div class="col-log-4 col-sm-6 col-xs-12">
-                    <div class="fg-line form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Port" data-ng-model="vm.data.port">
+                    <div class="form-group has-feedback" data-ng-class="{'has-error': (f.port.$touched || f.$submitted) && f.port.$error.required, 'has-success': (f.port.$touched || f.$submitted) && !f.port.$error.required }">
+                        <!--<label class="control-label" for="inputError2">Port</label>-->
+                        <div class="fg-line">                            
+                            <input type="number" name="port" class="form-control input-sm" placeholder="Port" data-ng-model="vm.data.port" required>      
+                            <small class="help-block" data-ng-if="(f.port.$touched || f.$submitted) && f.port.$error.required">Port is required.</small>                                        
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.port.$touched || f.$submitted) && f.port.$invalid, 'zmdi-check': (f.port.$touched || f.$submitted) && f.port.$valid }" data-ng-if="f.port.$touched || f.$submitted"></span>
                     </div>
                 </div>
             </div>
-            <div class="row">           
+            <div class="row">     
                 <div class="col-log-4 col-sm-6 col-xs-12">
-                    <div class="fg-line form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Username" data-ng-model="vm.data.username">
+                    <div class="form-group has-feedback" data-ng-class="{'has-error': (f.username.$touched || f.$submitted) && f.username.$error.required, 'has-success': (f.username.$touched || f.$submitted) && !f.username.$error.required }">
+                        <!--<label class="control-label" for="inputError2">Username</label>-->
+                        <div class="fg-line">                            
+                            <input type="text" name="username" class="form-control input-sm" placeholder="Username" data-ng-model="vm.data.username" required>      
+                            <small class="help-block" data-ng-if="(f.username.$touched || f.$submitted) && f.username.$error.required">Username is required.</small>                                        
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.username.$touched || f.$submitted) && f.username.$invalid, 'zmdi-check': (f.username.$touched || f.$submitted) && f.username.$valid }" data-ng-if="f.username.$touched || f.$submitted"></span>
                     </div>
                 </div>
             </div>
-            <div class="row">           
+            <div class="row">     
                 <div class="col-log-4 col-sm-6 col-xs-12">
-                    <div class="fg-line form-group">
-                        <input type="text" class="form-control input-sm" placeholder="Password" data-ng-model="vm.data.password">
+                    <div class="form-group has-feedback" data-ng-class="{'has-error': (f.password.$touched || f.$submitted) && f.password.$error.required, 'has-success': (f.password.$touched || f.$submitted) && !f.password.$error.required }">
+                        <!--<label class="control-label" for="inputError2">Password</label>-->
+                        <div class="fg-line">                            
+                            <input type="password" name="password" class="form-control input-sm" placeholder="Password" data-ng-model="vm.data.password" required>      
+                            <small class="help-block" data-ng-if="(f.password.$touched || f.$submitted) && f.password.$error.required">Password is required.</small>                                        
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.password.$touched || f.$submitted) && f.password.$invalid, 'zmdi-check': (f.password.$touched || f.$submitted) && f.password.$valid }" data-ng-if="f.password.$touched || f.$submitted"></span>
                     </div>
                 </div>
             </div>
