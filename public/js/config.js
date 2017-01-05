@@ -59,6 +59,16 @@ thingPanel
                 url: '/panel/:connectionId',
                 templateUrl: 'views/panel.html',
                 controller: 'panel.ctrl as vm'
+            })
+            .state ('panel.list', {
+                url: '/list',
+                templateUrl: 'views/panel.list.html',
+                controller: 'panel.list.ctrl as vm'
+            })
+            .state ('panel.edit', {
+                url: '/edit/:id',
+                templateUrl: 'views/panel.edit.html',
+                controller: 'panel.edit.ctrl as vm'
             });
 
 });

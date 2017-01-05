@@ -18,7 +18,7 @@ thingPanel.controller('connections.list.ctrl', ['$scope','$state', '$http',funct
     };
 
     vm.open = function(id){
-        $state.go('panel', {
+        $state.go('panel.list', {
             connectionId: id
         });
     };
@@ -78,5 +78,15 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
 thingPanel.controller('panel.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
     var vm = this;
     console.log('Panel');
+}]);
 
+thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
+    var vm = this;
+    console.log('List');
+}]);
+
+
+thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
+    var vm = this;
+    console.log('Edit');
 }]);
