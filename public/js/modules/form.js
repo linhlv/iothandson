@@ -1,4 +1,4 @@
-materialAdmin 
+thingPanel 
 
     // =========================================================================
     // INPUT FEILDS MODIFICATION

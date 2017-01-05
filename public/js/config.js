@@ -1,4 +1,4 @@
-materialAdmin
+thingPanel
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/connections/list");
 

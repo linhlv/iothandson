@@ -1,4 +1,4 @@
-var materialAdmin = angular.module('materialAdmin', [
+var thingPanel = angular.module('thingPanel', [
     'ngAnimate',
     'ngResource',
     'ui.router',
@@ -9,25 +9,21 @@ var materialAdmin = angular.module('materialAdmin', [
     'ngTable'
 ]);
 
-materialAdmin.controller('connections.edit.ctrl', ['$state', '$http',function($state, $http){
+thingPanel.controller('connections.edit.ctrl', ['$state', '$http',function($state, $http){
     var vm = this;
     vm.go = function(state){
         $state.go(state);
     };
 
-    vm.save = function(){
-        // Simple GET request example:
+    vm.save = function(){        
         $http({
+            data: vm.data,
             method: 'POST',
             url: '/cp/connections/'
         }).then(function successCallback(response) {
-            console.log(response);
-            // this callback will be called asynchronously
-            // when the response is available
+            console.log(response);            
         }, function errorCallback(response) {
             console.log(response);
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
         });
     };
 }])

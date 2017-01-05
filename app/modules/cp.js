@@ -17,7 +17,13 @@ module.exports = function(app, passport, isLoggedIn) {
 
 	router.post('/connections/', isLoggedIn, function(req, res) {
 		app.get('mongoClient').connect(app.get('dbConnectUrl'), function(err, db){			
-			res.send({message: 'Done'});
+			if(req && req.body){
+				if (err){
+					res.send(err);
+				}else{
+					res.json({ message: 'Connection is created!' });
+				}            	
+			}
 		});		
 	});
 

@@ -1,4 +1,4 @@
-materialAdmin
+thingPanel
 
     // =========================================================================
     // Header Messages and Notifications list Data
