@@ -5,7 +5,7 @@
     <div class="card-body card-padding">
         <form name="f" data-ng-submit="vm.save()" novalidate>
             <div class="row">     
-                <div class="col-log-4 col-sm-6 col-xs-12">
+                <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback" data-ng-class="{'has-error': (f.clientID.$touched || f.$submitted) && f.clientID.$error.required, 'has-success': (f.clientID.$touched || f.$submitted) && !f.clientID.$error.required }">
                         <!--<label class="control-label" for="inputError2">Client ID</label>-->
                         <div class="fg-line">                            
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row">     
-                <div class="col-log-4 col-sm-6 col-xs-12">
+                <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback" data-ng-class="{'has-error': (f.server.$touched || f.$submitted) && f.server.$error.required, 'has-success': (f.server.$touched || f.$submitted) && !f.server.$error.required }">
                         <!--<label class="control-label" for="inputError2">Server</label>-->
                         <div class="fg-line">                            
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="row">     
-                <div class="col-log-4 col-sm-6 col-xs-12">
+                <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback" data-ng-class="{'has-error': (f.port.$touched || f.$submitted) && f.port.$error.required, 'has-success': (f.port.$touched || f.$submitted) && !f.port.$error.required }">
                         <!--<label class="control-label" for="inputError2">Port</label>-->
                         <div class="fg-line">                            
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="row">     
-                <div class="col-log-4 col-sm-6 col-xs-12">
+                <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback" data-ng-class="{'has-error': (f.username.$touched || f.$submitted) && f.username.$error.required, 'has-success': (f.username.$touched || f.$submitted) && !f.username.$error.required }">
                         <!--<label class="control-label" for="inputError2">Username</label>-->
                         <div class="fg-line">                            
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="row">     
-                <div class="col-log-4 col-sm-6 col-xs-12">
+                <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback" data-ng-class="{'has-error': (f.password.$touched || f.$submitted) && f.password.$error.required, 'has-success': (f.password.$touched || f.$submitted) && !f.password.$error.required }">
                         <!--<label class="control-label" for="inputError2">Password</label>-->
                         <div class="fg-line">                            
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="row">           
-                <div class="col-log-4 col-sm-6 col-xs-12">
+                <div class="col-log-4 col-sm-4 col-xs-12">
                     <div class="form-group">                    
                         <button type="submit" class="btn btn-primary btn-sm m-t-5">Save</button>
                         <button type="button" class="btn btn btn-success btn-sm m-t-5" data-ng-click="vm.go('connections.list')">Cancel</button>
