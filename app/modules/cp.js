@@ -25,11 +25,13 @@ module.exports = function(app, passport, isLoggedIn) {
 
 	router.get('/connections/:id', isLoggedIn, function(req, res) {
 		console.log(req.params.id);
-		db.findOne('connections', req.params.id, function(result){		
+
+		db.findDocuments('connections', {_id: req.params.id}, function(result){			
 			console.log(result)	;
 			console.log(result.length)	;
 			res.json(result);
-		});				
+		});
+
 	});
 
 	router.post('/connections/', isLoggedIn, function(req, res) {
