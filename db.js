@@ -23,8 +23,7 @@ module.exports = function(mongoClient, dbConnectUrl) {
                 // Find some documents
                 collection.find(query).toArray(function(err, docs) {
                     assert.equal(err, null);
-                    console.log("Found the following records");
-                    console.log(docs)
+                    console.log("Found the following records");                    
                     callback(docs);
                 });
 		    });	            

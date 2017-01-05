@@ -8,9 +8,12 @@
                     <ul class="lv-attrs">
                         <li data-ng-if="connection.createdOn">Date Created: <span data-ng-bind="connection.createdOn|date:'yyyy-MM-dd HH:mm:ss'"></span></li>                        
                     </ul>
-                    <div class="lv-actions actions">
-                        <a href="">
-                            <i class="zmdi zmdi-more-vert"></i>
+                    <div class="lv-actions actions">                        
+                        <a href="" data-ng-click="vm.remove(connection._id)">
+                            <i class="zmdi zmdi-delete"></i>
+                        </a>
+                        <a href="" data-ng-click="vm.open(connection._id)">
+                            <i class="zmdi zmdi-tv-list"></i>
                         </a>
                     </div>
                 </div>

@@ -13,6 +13,16 @@ var thingPanel = angular.module('thingPanel', [
 thingPanel.controller('connections.list.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
     var vm = this;
 
+    vm.remove = function(id){
+        console.log('remove', id);
+    };
+
+    vm.open = function(id){
+        $state.go('panel', {
+            connectionId: id
+        });
+    };
+
     var init  = function(){
         $http({            
             method: 'GET',
@@ -20,7 +30,7 @@ thingPanel.controller('connections.list.ctrl', ['$scope','$state', '$http',funct
         }).then(function successCallback(response) {
             vm.list = response.data;            
         }, function errorCallback(response) {}); 
-    }
+    };
 
     init();      
 }]);
@@ -63,4 +73,10 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
         });   
     };
 }]);
- 
+
+
+thingPanel.controller('panel.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
+    var vm = this;
+    console.log('Panel');
+
+}]);
