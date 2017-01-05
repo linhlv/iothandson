@@ -1,10 +1,10 @@
 
 // app/routes.js
 module.exports = function(app, passport, isLoggedIn) {
-    var express = require('express');
-    var router 	= express.Router();   
-	var util 	= require('util'); 
-	var db 		= app.get('db');
+    var express 	= require('express');
+    var router 		= express.Router();   
+	var util 		= require('util'); 
+	var Connection  = require('../models/connection');
     
 	// =====================================
 	// CP SECTION =========================
@@ -18,20 +18,20 @@ module.exports = function(app, passport, isLoggedIn) {
 	});
 
 	router.get('/connections/', isLoggedIn, function(req, res) {
-		db.findDocuments('connections', {createdBy: req.user._id}, function(result){			
-			res.json(result);
-		});
+		Connection.find(function(err, items) {
+            if (err)
+                res.send(err);
+
+            res.json(items);
+        });		
 	});
 
 	router.get('/connections/:id', isLoggedIn, function(req, res) {
-		console.log(req.params.id);
-
-		db.findDocuments('connections', {_id: req.params.id}, function(result){			
-			console.log(result)	;
-			console.log(result.length)	;
-			res.json(result);
-		});
-
+		Connection.findById(req.params.id, function(err, item) {
+            if (err)
+                res.send(err);
+            res.json(item);
+        });
 	});
 
 	router.post('/connections/', isLoggedIn, function(req, res) {
@@ -53,17 +53,22 @@ module.exports = function(app, passport, isLoggedIn) {
 					return;
 				}			
 
-				var connections = [{
-					clientID: req.body.clientID,
-					server: req.body.server,
-					port: req.body.port,
-					username: req.body.username,
-					password: req.body.password,
-					createdBy: req.user._id,
-					createdOn: new Date()
-				}];
-				db.insertDocuments('connections', connections, function(result){
-					res.json(result);
+				var connection = new Connection();
+
+				connection.clientID = req.body.clientID;
+				connection.server = req.body.server;
+				connection.port = req.body.port;
+				connection.username = req.body.username;
+				connection.password = req.body.password;
+				connection.createdBy = req.user._id;
+				connection.createdOn = new Date();
+
+				// save the connection and check for errors
+				connection.save(function(err) {
+					if (err)
+						res.send(err);
+
+					res.json({ message: 'Connection is created!' });
 				});
 			});       	
 		}

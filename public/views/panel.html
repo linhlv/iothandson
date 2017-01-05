@@ -1,6 +1,6 @@
 <div class="block-header">
     <h2>Control Panel
-        <small>Your are connecting to: <strong>test</strong></small>
+        <small>Your are connecting to <strong data-ng-if="vm.data.server && vm.data.port"><span data-ng-bind="vm.data.server"></span>:<span data-ng-bind="vm.data.port"></span></strong></small>
     </h2>
 </div>
 <data-ui-view></data-ui-view>

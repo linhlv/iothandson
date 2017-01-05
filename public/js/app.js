@@ -76,17 +76,14 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
 
 
 thingPanel.controller('panel.ctrl', ['$scope','$state', '$http', '$stateParams',function($scope, $state, $http, $stateParams){
-    var vm = this;
-    console.log('Panel:', $stateParams.connectionId);
-     var init  = function(){
+    var vm = this;    
+    var init  = function(){
         $http({            
             method: 'GET',
             url: '/cp/connections/' + $stateParams.connectionId
         }).then(function successCallback(response) {
-            console.log(response);
-        }, function errorCallback(response) {
-            console.log(response);
-        }); 
+            vm.data = response.data;
+        }, function errorCallback(response) {}); 
     };
 
     init(); 
