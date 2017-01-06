@@ -14,7 +14,7 @@ thingPanel
             },
             link: function(scope, element) {
                 scope.$watch("model", function(nv, ov) {
-                    if(nv!==undefined || nv!==''){
+                    if(nv!==undefined && nv!==''){
                         element.parent().addClass('fg-toggled');                        
                     }
                 });    

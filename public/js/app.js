@@ -150,7 +150,28 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
     };
 
     vm.delete = function(id){
-        
+        swal({
+            title: "Are you sure your want to delete?",
+            text: "You are going to delete this publish!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        },function(){
+            $http({            
+                method: 'DELETE',
+                url: '/cp/publications/' + $stateParams.connectionId + '/' + id
+            }).then(function successCallback(response) {     
+                swal({
+                    title: 'Deleted !',   
+                    text: 'Your publication has been deleted!',   
+                    type: 'success'
+                }, function(){
+                    rebind();
+                });       
+            }, function errorCallback(response) {});             
+        });
     };
 
     vm.publish = function (id,value){
@@ -164,7 +185,7 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
         console.log(id, value);
     };
 
-    var init  = function(){
+    var rebind  = function(){
         $http({            
             method: 'GET',
             url: '/cp/publications/' + $stateParams.connectionId
@@ -173,7 +194,7 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
         }, function errorCallback(response) {}); 
     };
 
-    init(); 
+    rebind(); 
 }]);
 
 
@@ -199,7 +220,7 @@ thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$stateParams', '$h
             data: vm.data            
         };
 
-        if($stateParams.id){
+        if($stateParams.id && $stateParams.id!=='0'){
             savingData.url = '/cp/publications/' + $stateParams.connectionId + '/' + $stateParams.id;
             savingData.method = 'PUT';
         }  else{
