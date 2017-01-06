@@ -89,10 +89,23 @@ thingPanel.controller('panel.ctrl', ['$scope','$state', '$http', '$stateParams',
     init(); 
 }]);
 
-thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
-    var vm = this;
-    vm.radioModel = '0';
-    console.log('List');
+thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$http',function($scope, $state, $stateParams, $http){
+    var vm = this;   
+
+    var init  = function(){
+        $http({            
+            method: 'GET',
+            url: '/cp/publications/' + $stateParams.connectionId
+        }).then(function successCallback(response) {            
+            vm.list = response.data;
+        }, function errorCallback(response) {}); 
+    };
+
+    vm.publish = function (id,value){
+        console.log(id, value);
+    };
+
+    init(); 
 }]);
 
 
@@ -136,5 +149,5 @@ thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$stateParams', '$h
                 $scope.f.$setSubmitted(false);                    
             });   
         });   
-    };
+    };    
 }]);

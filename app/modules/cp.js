@@ -75,6 +75,15 @@ module.exports = function(app, passport, isLoggedIn) {
 		}
 	});
 
+	router.get('/publications/:connectionId', isLoggedIn, function(req, res) {
+		Publication.find({ connectionId : req.params.connectionId}, function(err, items) {
+            if (err)
+                res.send(err);
+
+            res.json(items);
+        });		
+	});
+
 	router.post('/publications/', isLoggedIn, function(req, res) {
 		if(req && req.body){
 			req.checkBody('friendlyName', 'Friendly name is required').notEmpty();

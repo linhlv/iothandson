@@ -5,6 +5,7 @@ var schema   = new Schema({
     friendlyName: String,
     topic: String,
     description: String,
+    connectionId: String,
     textOn: String,
     textOff: String,
     textAuto: String,

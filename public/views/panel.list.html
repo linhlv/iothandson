@@ -1,7 +1,7 @@
 
-<div class="card">
+<div class="card" data-ng-repeat="item in vm.list">
     <div class="card-header ch-alt">
-        <h2>Relay 1 <small>Pellentesque ac lectus sed elit dictum vehicula</small></h2>
+        <h2><span data-ng-bind="item.friendlyName"></span> <small data-ng-bind="item.description"></small></h2>
         <ul class="actions">
             <li>
                 <a href="">
@@ -16,11 +16,25 @@
         </ul>
     </div>
 
-    <div class="card-body card-padding">        
+    <div class="card-body card-padding">       
+        <div class="row">
+            <div class="col-sm-2">
+                <p><i class="zmdi zmdi-dot-circle zmdi-hc-fw"></i><span data-ng-bind="item.valueOn"></span> <code data-ng-bind="item.textOn"></code></p> 
+            </div>
+            <div class="col-sm-2">
+                <p><i class="zmdi zmdi-circle-o zmdi-hc-fw"></i><span data-ng-bind="item.valueOff"></span> <code data-ng-bind="item.textOff"></code></p> 
+            </div>
+            <div class="col-sm-2">
+                <p><i class="zmdi zmdi-refresh-alt zmdi-hc-fw"></i><span data-ng-bind="item.valueAuto"></span> <code data-ng-bind="item.textAuto"></code></p> 
+            </div>
+            <div class="col-sm-2">
+                <p data-ng-if="item.value"><i class="zmdi zmdi-caret-right-circle zmdi-hc-fw"></i><code data-ng-bind="item.value"></code></p> 
+            </div>
+        </div>
         <div class="btn-group">
-            <label class="btn btn-primary" data-ng-model="vm.state" uib-btn-radio="'0'">Off</label>
-            <label class="btn btn-primary" data-ng-model="vm.state" uib-btn-radio="'1'">On</label>
-            <label class="btn btn-primary" data-ng-model="vm.state" uib-btn-radio="'2'">Auto</label>
+            <label class="btn btn-primary" data-ng-model="item.value" uib-btn-radio="'{{item.valueOn}}'" data-ng-bind="item.textOn" data-ng-click="vm.publish(item._id, item.value)"></label>
+            <label class="btn btn-primary" data-ng-model="item.value" uib-btn-radio="'{{item.valueOff}}'" data-ng-bind="item.textOff" data-ng-click="vm.publish(item._id, item.value)"></label>
+            <label class="btn btn-primary" data-ng-model="item.value" uib-btn-radio="'{{item.valueAuto}}'" data-ng-bind="item.textAuto" data-ng-click="vm.publish(item._id, item.value)"></label>
         </div>               
     </div>
 </div>
