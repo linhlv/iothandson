@@ -193,15 +193,23 @@ thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$stateParams', '$h
 
         var publication = vm.data;
         
-        publication.connectionId = $stateParams.connectionId;        
+        publication.connectionId = $stateParams.connectionId;      
+        
+        var savingData = {
+            data: vm.data            
+        };
 
-        $http({
-            data: vm.data,
-            method: 'POST',
-            url: '/cp/publications/'
-        }).then(function successCallback(response) {
+        if($stateParams.id){
+            savingData.url = '/cp/publications/' + $stateParams.connectionId + '/' + $stateParams.id;
+            savingData.method = 'PUT';
+        }  else{
+            savingData.url = '/cp/publications/';
+            savingData.method = 'POST';
+        }
+
+        $http(savingData).then(function successCallback(response) {
             swal({
-                title: "Created publication successfully!",   
+                title: "Saved publication successfully!",   
                 text: "You are able to control your device remotely!",   
                 type: "success"
             }, function(){
@@ -210,7 +218,7 @@ thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$stateParams', '$h
             });              
         }, function errorCallback(response) {
             swal({
-                title: "Creating publication with errors!",   
+                title: "Saving publication with errors!",   
                 text: "You may entered incorrect information, please check again!",   
                 type: "error"
             }, function(){

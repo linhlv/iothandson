@@ -92,6 +92,61 @@ module.exports = function(app, passport, isLoggedIn) {
         });	
 	});
 
+	router.put('/publications/:connectionId/:id', isLoggedIn, function(req, res) {		
+		if(req && req.params.connectionId && req.params.id && req.body){
+			req.checkBody('friendlyName', 'Friendly name is required').notEmpty();
+			req.checkBody('topic', 'Topic is required').notEmpty();
+			req.checkBody('textOn', 'Text (on) is required as an integer').notEmpty();
+			req.checkBody('textOff', 'Text (off) is required').notEmpty();
+			req.checkBody('textAuto', 'Text (auto) is required').notEmpty();
+			req.checkBody('valueOn', 'Value (on) is required').notEmpty();
+			req.checkBody('valueOff', 'Value (off) is required').notEmpty();
+			req.checkBody('valueAuto', 'Value (auto) is required').notEmpty();
+			req.checkBody('connectionId', 'Connection Id is required').notEmpty();
+			req.checkParams('connectionId', 'Connection Id is required').notEmpty();
+			req.checkParams('id', 'Id is required').notEmpty();
+
+			req.getValidationResult().then(function(result) {
+				if (!result.isEmpty()) {
+					res.send(
+						{
+							message: 'There have been validation errors',
+							errors: result.array()
+						}, 400
+					);
+					return;
+				}			
+
+				Publication.findById(req.params.id, function (err, model) {
+					if (err)
+						return res.send(err, 400);
+					
+					model.friendlyName = req.body.friendlyName;
+					model.topic = req.body.topic;
+					model.description = req.body.description;
+					model.textOn = req.body.textOn;
+					model.textOff = req.body.textOff;
+					model.textAuto = req.body.textAuto;
+					model.valueOn = req.body.valueOn;
+					model.valueOff = req.body.valueOff;
+					model.valueAuto = req.body.valueAuto;
+					model.connectionId = req.body.connectionId;
+					model.createdBy = req.user._id;
+					model.createdOn = new Date();
+
+					// save the connection and check for errors
+					model.save(function(err) {
+						if (err)
+							res.send(err, 400);
+
+						res.json({ message: 'Publication is saved!' });
+					});
+				});
+			});       	
+		}
+		
+	});
+
 	router.post('/publications/', isLoggedIn, function(req, res) {
 		if(req && req.body){
 			req.checkBody('friendlyName', 'Friendly name is required').notEmpty();
@@ -133,7 +188,7 @@ module.exports = function(app, passport, isLoggedIn) {
 				// save the connection and check for errors
 				model.save(function(err) {
 					if (err)
-						res.send(err);
+						res.send(err, 400);
 
 					res.json({ message: 'Publication is created!' });
 				});

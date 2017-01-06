@@ -1,10 +1,6 @@
 <div class="block-header">
-    <h2>Control Panel &nbsp;
-        <div class="toggle-switch" data-ts-color="green">            
-            <input id="ts4" type="checkbox" hidden="hidden" data-ng-model="vm.connecting" data-ng-change="vm.connectingChange()">
-            <label for="ts4" class="ts-helper"></label>
-        </div>
-        <small>Your are <span data-ng-bind="vm.connecting ? 'connecting':'disconnected'"></span> to <strong data-ng-if="vm.data.server && vm.data.port"><span data-ng-bind="vm.data.server"></span>:<span data-ng-bind="vm.data.port"></span></strong></small>
+    <h2>Control Panel
+        <small>Your server is: <strong data-ng-if="vm.data.server && vm.data.port"><span data-ng-bind="vm.data.server"></span>:<span data-ng-bind="vm.data.port"></span></strong></small>
     </h2>    
 </div>
 <data-ui-view></data-ui-view>
