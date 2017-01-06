@@ -76,13 +76,47 @@ thingPanel.controller('connections.edit.ctrl', ['$scope','$state', '$http',funct
 
 
 thingPanel.controller('panel.ctrl', ['$scope','$state', '$http', '$stateParams',function($scope, $state, $http, $stateParams){
+    var socket = io();
+
+    socket.on('mqtt_connected', function(data){
+        console.log(data);
+        $scope.$broadcast('mqtt_connected', { connected: true });
+        swal({
+            title: 'MQTT connected !',   
+            text: 'You are connected to ' + vm.data.server + '!',   
+            type: 'success'
+        }, function(){});
+    });
+
+    socket.on('mqtt_disconnected', function(data){
+        console.log(data);
+        $scope.$broadcast('mqtt_disconnected', { connected: false });
+        swal({
+            title: 'MQTT disconnected !',   
+            text: 'You are disconnected to ' + vm.data.server + '!',   
+            type: 'success'
+        }, function(){});
+    });
+
     var vm = this;    
+
+    vm.connecting = false;
+
+    vm.connectingChange = function(){        
+        if(vm.connecting){
+            socket.emit('mqtt_connect', {connectionId : $stateParams.connectionId});                
+        }else{
+            socket.emit('mqtt_disconnect', {connectionId : $stateParams.connectionId});                
+        }        
+    }
+
     var init  = function(){
         $http({            
             method: 'GET',
             url: '/cp/connections/' + $stateParams.connectionId
         }).then(function successCallback(response) {
             vm.data = response.data;
+            $scope.$broadcast('panel_connection', response.data);
         }, function errorCallback(response) {}); 
     };
 
@@ -91,6 +125,23 @@ thingPanel.controller('panel.ctrl', ['$scope','$state', '$http', '$stateParams',
 
 thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$http',function($scope, $state, $stateParams, $http){
     var vm = this;   
+    vm.connecting = false;   
+
+    $scope.$on('panel_connection', function (event, data) {
+        vm.connection = data;
+    });
+
+    $scope.$on('mqtt_connected', function (event, data) {
+        vm.connecting = data.connected;
+        console.log('event mqtt_connected'); // 'Data to send'
+        console.log(data); // 'Data to send'
+    });
+
+    $scope.$on('mqtt_disconnected', function (event, data) {
+        vm.connecting = data.connected;
+        console.log('event mqtt_disconnected'); // 'Data to send'
+        console.log(data); // 'Data to send'
+    });
 
     var init  = function(){
         $http({            
@@ -102,6 +153,13 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
     };
 
     vm.publish = function (id,value){
+        if(!vm.connecting){
+            swal({
+                title: 'Disconnected !',   
+                text: 'You are not connected to ' + vm.connection.server + ', Please connect and try again!',   
+                type: 'error'
+            }, function(){});
+        }
         console.log(id, value);
     };
 

@@ -17,6 +17,7 @@ var session 		= require('express-session');
 var validator       = require('express-validator');
 var databaseConfig  = require('./config/database.js');
 var io              = require('socket.io')(http);
+var sk              = require('./app/sk');
 
 // configuration ===============================================================
 mongoose.connect(databaseConfig.url); // connect to our database
@@ -42,6 +43,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
+
+io.on('connection', function(socket){
+    console.log('A user connected.');
+    sk(socket, io);    
+});
+
+app.set('socket.io', io);
 
 // launch ======================================================================
 
