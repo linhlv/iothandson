@@ -143,13 +143,14 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
         console.log(data); // 'Data to send'
     });
 
-    var init  = function(){
-        $http({            
-            method: 'GET',
-            url: '/cp/publications/' + $stateParams.connectionId
-        }).then(function successCallback(response) {            
-            vm.list = response.data;
-        }, function errorCallback(response) {}); 
+    
+
+    vm.edit = function(id){
+        $state.go('panel.edit', {id: id});   
+    };
+
+    vm.delete = function(id){
+        
     };
 
     vm.publish = function (id,value){
@@ -161,6 +162,15 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
             }, function(){});
         }
         console.log(id, value);
+    };
+
+    var init  = function(){
+        $http({            
+            method: 'GET',
+            url: '/cp/publications/' + $stateParams.connectionId
+        }).then(function successCallback(response) {            
+            vm.list = response.data;
+        }, function errorCallback(response) {}); 
     };
 
     init(); 
@@ -208,4 +218,17 @@ thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$stateParams', '$h
             });   
         });   
     };    
+
+
+    var init  = function(){
+        $http({            
+            method: 'GET',
+            url: '/cp/publications/' + $stateParams.connectionId + '/' + $stateParams.id
+        }).then(function successCallback(response) {            
+            vm.data = response.data;
+            
+        }, function errorCallback(response) {}); 
+    };
+
+    init(); 
 }]);

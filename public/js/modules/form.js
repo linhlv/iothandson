@@ -6,6 +6,23 @@ thingPanel
 
     //Add blue animated border and remove with condition when focus and blur
 
+     .directive('fgIp', function(){
+        return {
+            restrict: 'C',
+            scope: {
+                model: '=ngModel'
+            },
+            link: function(scope, element) {
+                scope.$watch("model", function(nv, ov) {
+                    if(nv!==undefined || nv!==''){
+                        element.parent().addClass('fg-toggled');                        
+                    }
+                });    
+            }
+        }
+        
+    })
+
     .directive('fgLine', function(){
         return {
             restrict: 'C',

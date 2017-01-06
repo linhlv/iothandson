@@ -75,13 +75,21 @@ module.exports = function(app, passport, isLoggedIn) {
 		}
 	});
 
-	router.get('/publications/:connectionId', isLoggedIn, function(req, res) {
+	router.get('/publications/:connectionId', isLoggedIn, function(req, res) {		
 		Publication.find({ connectionId : req.params.connectionId}, function(err, items) {
             if (err)
                 res.send(err);
 
             res.json(items);
         });		
+	});
+
+	router.get('/publications/:connectionId/:id', isLoggedIn, function(req, res) {
+		Publication.findById(req.params.id, function(err, item) {
+            if (err)
+                res.send(err);
+            res.json(item);
+        });	
 	});
 
 	router.post('/publications/', isLoggedIn, function(req, res) {
