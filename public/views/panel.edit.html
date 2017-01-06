@@ -1,8 +1,123 @@
 <div class="card">
     <div class="card-header">
-        <h2>Edit</h2>
+        <h2>PUBLICATION</h2>
     </div>
     <div class="card-body card-padding">
-      
+        <form name="f" data-ng-submit="vm.save()" novalidate>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.friendlyName.$touched || f.$submitted) && f.friendlyName.$error.required, 'has-success': (f.friendlyName.$touched || f.$submitted) && !f.friendlyName.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="friendlyName" class="form-control fg-input" data-ng-model="vm.data.friendlyName" required>                                  
+                            <label class="fg-label">Friendly name (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.friendlyName.$touched || f.$submitted) && f.friendlyName.$invalid, 'zmdi-check': (f.friendlyName.$touched || f.$submitted) && f.friendlyName.$valid }" data-ng-if="f.friendlyName.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.friendlyName.$touched || f.$submitted) && f.friendlyName.$error.required">Friendly name is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30">
+                        <div class="fg-line">
+                            <textarea class="form-control" name="description" data-autosize-on="true" data-ng-model="vm.data.description" ></textarea>                            
+                            <label class="fg-label">Description</label>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.topic.$touched || f.$submitted) && f.topic.$error.required, 'has-success': (f.topic.$touched || f.$submitted) && !f.topic.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="topic" class="form-control fg-input" data-ng-model="vm.data.topic" required>                                  
+                            <label class="fg-label">Topic (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.topic.$touched || f.$submitted) && f.topic.$invalid, 'zmdi-check': (f.topic.$touched || f.$submitted) && f.topic.$valid }" data-ng-if="f.topic.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.topic.$touched || f.$submitted) && f.topic.$error.required">Topic is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.textOn.$touched || f.$submitted) && f.textOn.$error.required, 'has-success': (f.textOn.$touched || f.$submitted) && !f.textOn.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="textOn" class="form-control fg-input" data-ng-model="vm.data.textOn" required>                                  
+                            <label class="fg-label">Button text (on) (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.textOn.$touched || f.$submitted) && f.textOn.$invalid, 'zmdi-check': (f.textOn.$touched || f.$submitted) && f.textOn.$valid }" data-ng-if="f.textOn.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.textOn.$touched || f.$submitted) && f.textOn.$error.required">Button text (on) is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.textOff.$touched || f.$submitted) && f.textOff.$error.required, 'has-success': (f.textOff.$touched || f.$submitted) && !f.textOff.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="textOff" class="form-control fg-input" data-ng-model="vm.data.textOff" required>                                  
+                            <label class="fg-label">Button text (off) (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.textOff.$touched || f.$submitted) && f.textOff.$invalid, 'zmdi-check': (f.textOff.$touched || f.$submitted) && f.textOff.$valid }" data-ng-if="f.textOff.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.textOff.$touched || f.$submitted) && f.textOff.$error.required">Button text (off) is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.textAuto.$touched || f.$submitted) && f.textAuto.$error.required, 'has-success': (f.textAuto.$touched || f.$submitted) && !f.textAuto.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="textAuto" class="form-control fg-input" data-ng-model="vm.data.textAuto" required>                                  
+                            <label class="fg-label">Button text (auto) (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.textAuto.$touched || f.$submitted) && f.textAuto.$invalid, 'zmdi-check': (f.textAuto.$touched || f.$submitted) && f.textAuto.$valid }" data-ng-if="f.textAuto.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.textAuto.$touched || f.$submitted) && f.textAuto.$error.required">Button text (auto) is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.valueOn.$touched || f.$submitted) && f.valueOn.$error.required, 'has-success': (f.valueOn.$touched || f.$submitted) && !f.valueOn.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="valueOn" class="form-control fg-input" data-ng-model="vm.data.valueOn" required>                                  
+                            <label class="fg-label">Publish value (on) (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.valueOn.$touched || f.$submitted) && f.valueOn.$invalid, 'zmdi-check': (f.valueOn.$touched || f.$submitted) && f.valueOn.$valid }" data-ng-if="f.valueOn.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.valueOn.$touched || f.$submitted) && f.valueOn.$error.required">Publish value (on) is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.valueOff.$touched || f.$submitted) && f.valueOff.$error.required, 'has-success': (f.valueOff.$touched || f.$submitted) && !f.valueOff.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="valueOff" class="form-control fg-input" data-ng-model="vm.data.valueOff" required>                                  
+                            <label class="fg-label">Publish value (off) (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.valueOff.$touched || f.$submitted) && f.valueOff.$invalid, 'zmdi-check': (f.valueOff.$touched || f.$submitted) && f.valueOff.$valid }" data-ng-if="f.valueOff.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.valueOff.$touched || f.$submitted) && f.valueOff.$error.required">Publish value (off) is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">     
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group fg-float m-b-30 has-feedback" data-ng-class="{'has-error': (f.valueAuto.$touched || f.$submitted) && f.valueAuto.$error.required, 'has-success': (f.valueAuto.$touched || f.$submitted) && !f.valueAuto.$error.required }">
+                        <div class="fg-line">
+                            <input type="text" name="valueAuto" class="form-control fg-input" data-ng-model="vm.data.valueAuto" required>                                  
+                            <label class="fg-label">Publish value (auto) (*)</label>                            
+                        </div>
+                        <span class="zmdi form-control-feedback"  data-ng-class="{'zmdi-close': (f.valueAuto.$touched || f.$submitted) && f.valueAuto.$invalid, 'zmdi-check': (f.valueAuto.$touched || f.$submitted) && f.valueAuto.$valid }" data-ng-if="f.valueAuto.$touched || f.$submitted"></span>
+                        <small class="help-block" data-ng-if="(f.valueAuto.$touched || f.$submitted) && f.valueAuto.$error.required">Publish value (auto) is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">           
+                <div class="col-log-4 col-sm-4 col-xs-12">
+                    <div class="form-group">                    
+                        <button type="submit" class="btn btn-primary btn-sm m-t-5">Save</button>                        
+                        <button type="button" class="btn btn btn-success btn-sm m-t-5" data-ng-click="vm.cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

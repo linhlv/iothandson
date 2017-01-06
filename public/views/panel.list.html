@@ -1,111 +1,26 @@
 
-<div class="mini-charts">
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <div class="mini-charts-item bgm-cyan">
-                <div class="clearfix">
-                    <div class="chart stats-bar" data-sparkline-bar=""><canvas width="83" height="45" style="display: inline-block; width: 83px; height: 45px; vertical-align: top;"></canvas></div>
-                    <div class="count">
-                        <small>Website Traffics</small>
-                        <h2>987,459</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3">
-            <div class="mini-charts-item bgm-lightgreen">
-                <div class="clearfix">
-                    <div class="chart stats-bar-2" data-sparkline-bar=""><canvas width="83" height="45" style="display: inline-block; width: 83px; height: 45px; vertical-align: top;"></canvas></div>
-                    <div class="count">
-                        <small>Website Impressions</small>
-                        <h2>356,785K</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3">
-            <div class="mini-charts-item bgm-orange">
-                <div class="clearfix">
-                    <div class="chart stats-line" data-sparkline-line=""><canvas width="85" height="45" style="display: inline-block; width: 85px; height: 45px; vertical-align: top;"></canvas></div>
-                    <div class="count">
-                        <small>Total Sales</small>
-                        <h2>$ 458,778</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3">
-            <div class="mini-charts-item bgm-bluegray">
-                <div class="clearfix">
-                    <div class="chart stats-line-2" data-sparkline-line=""><canvas width="85" height="45" style="display: inline-block; width: 85px; height: 45px; vertical-align: top;"></canvas></div>
-                    <div class="count">
-                        <small>Support Tickets</small>
-                        <h2>23,856</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="card">
     <div class="card-header ch-alt">
         <h2>Relay 1 <small>Pellentesque ac lectus sed elit dictum vehicula</small></h2>
-        <div class="lv-actions actions dropdown" uib-dropdown>
-            <a href="" uib-dropdown-toggle aria-expanded="true">
-                <i class="zmdi zmdi-more-vert"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                    <a href="">Edit</a>
-                </li>
-                <li>
-                    <a href="">Delete</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="actions">
+            <li>
+                <a href="">
+                    <i class="zmdi zmdi-edit"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="zmdi zmdi-delete"></i>
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div class="card-body card-padding">        
         <div class="btn-group">
-            <label class="btn btn-primary" ng-model="vm.radioModel" uib-btn-radio="'0'">Off</label>
-            <label class="btn btn-primary" ng-model="vm.radioModel" uib-btn-radio="'1'">On</label>
-            <label class="btn btn-primary" ng-model="vm.radioModel" uib-btn-radio="'2'">Auto</label>
-        </div>
-        <div class="row">
-            <div class="col-log-12 col-sm-12 col-xs-12">&nbsp;</div>
-        </div>
-        <div class="row" data-ng-if="vm.radioModel=='2'">
-            <div class="col-log-12 col-sm-12 col-xs-12">
-                <small>You are changing the setting to auto, to make affect, please enter <strong>Interval</strong> and <strong>Duration</strong> values and <strong>Save</strong></small>
-            </div>
-        </div>
-        <div class="row" data-ng-if="vm.radioModel=='2'">
-             <form>
-                 <div class="col-log-4 col-sm-4 col-xs-12">
-                    <div class="form-group fg-float m-b-30">
-                        <div class="fg-line">
-                            <input type="number" class="form-control input-sm">
-                            <label class="fg-label">Interval (in seconds)</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-log-4 col-sm-4 col-xs-12">
-                    <div class="form-group fg-float m-b-30">
-                        <div class="fg-line">
-                            <input type="number" class="form-control input-sm">
-                            <label class="fg-label">Duration (in seconds)</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-log-4 col-sm-4 col-xs-12">
-                    <button class="btn btn-info">Save</button>
-                </div>                
-            </form>              
-        </div>            
+            <label class="btn btn-primary" data-ng-model="vm.state" uib-btn-radio="'0'">Off</label>
+            <label class="btn btn-primary" data-ng-model="vm.state" uib-btn-radio="'1'">On</label>
+            <label class="btn btn-primary" data-ng-model="vm.state" uib-btn-radio="'2'">Auto</label>
+        </div>               
     </div>
 </div>

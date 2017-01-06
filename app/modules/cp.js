@@ -5,6 +5,7 @@ module.exports = function(app, passport, isLoggedIn) {
     var router 		= express.Router();   
 	var util 		= require('util'); 
 	var Connection  = require('../models/connection');
+	var Publication  = require('../models/publication');
     
 	// =====================================
 	// CP SECTION =========================
@@ -53,22 +54,71 @@ module.exports = function(app, passport, isLoggedIn) {
 					return;
 				}			
 
-				var connection = new Connection();
+				var model = new Connection();
 
-				connection.clientID = req.body.clientID;
-				connection.server = req.body.server;
-				connection.port = req.body.port;
-				connection.username = req.body.username;
-				connection.password = req.body.password;
-				connection.createdBy = req.user._id;
-				connection.createdOn = new Date();
+				model.clientID = req.body.clientID;
+				model.server = req.body.server;
+				model.port = req.body.port;
+				model.username = req.body.username;
+				model.password = req.body.password;
+				model.createdBy = req.user._id;
+				model.createdOn = new Date();
 
 				// save the connection and check for errors
-				connection.save(function(err) {
+				model.save(function(err) {
 					if (err)
 						res.send(err);
 
 					res.json({ message: 'Connection is created!' });
+				});
+			});       	
+		}
+	});
+
+	router.post('/publications/', isLoggedIn, function(req, res) {
+		if(req && req.body){
+			req.checkBody('friendlyName', 'Friendly name is required').notEmpty();
+			req.checkBody('topic', 'Topic is required').notEmpty();
+			req.checkBody('textOn', 'Text (on) is required as an integer').notEmpty();
+			req.checkBody('textOff', 'Text (off) is required').notEmpty();
+			req.checkBody('textAuto', 'Text (auto) is required').notEmpty();
+			req.checkBody('valueOn', 'Value (on) is required').notEmpty();
+			req.checkBody('valueOff', 'Value (off) is required').notEmpty();
+			req.checkBody('valueAuto', 'Value (auto) is required').notEmpty();
+			req.checkBody('connectionId', 'Connection Id is required').notEmpty();
+
+			req.getValidationResult().then(function(result) {
+				if (!result.isEmpty()) {
+					res.send(
+						{
+							message: 'There have been validation errors',
+							errors: result.array()
+						}, 400
+					);
+					return;
+				}			
+
+				var model = new Publication();
+
+				model.friendlyName = req.body.friendlyName;
+				model.topic = req.body.topic;
+				model.description = req.body.description;
+				model.textOn = req.body.textOn;
+				model.textOff = req.body.textOff;
+				model.textAuto = req.body.textAuto;
+				model.valueOn = req.body.valueOn;
+				model.valueOff = req.body.valueOff;
+				model.valueAuto = req.body.valueAuto;
+				model.connectionId = req.body.connectionId;
+				model.createdBy = req.user._id;
+				model.createdOn = new Date();
+
+				// save the connection and check for errors
+				model.save(function(err) {
+					if (err)
+						res.send(err);
+
+					res.json({ message: 'Publication is created!' });
 				});
 			});       	
 		}

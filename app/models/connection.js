@@ -1,7 +1,7 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-var connectionSchema   = new Schema({
+var schema   = new Schema({
     clientID: String,
     server: String,
     port: String,
@@ -11,4 +11,4 @@ var connectionSchema   = new Schema({
     createdOn: Date,
 });
 
-module.exports = mongoose.model('Connection', connectionSchema);
+module.exports = mongoose.model('Connection', schema);

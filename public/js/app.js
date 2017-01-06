@@ -96,7 +96,45 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$http',function($s
 }]);
 
 
-thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$http',function($scope, $state, $http){
+thingPanel.controller('panel.edit.ctrl', ['$scope','$state', '$stateParams', '$http',function($scope, $state, $stateParams, $http){
     var vm = this;
-    console.log('Edit');
+    vm.data = vm.data || {};
+    
+    vm.cancel = function(){
+        $state.go('panel.list', { connectionId: $stateParams.connectionId });
+    };
+
+    vm.save = function(){
+        if(!$scope.f.$valid){             
+            $scope.f.$setSubmitted(false);     
+            return;            
+        }
+
+        var publication = vm.data;
+        
+        publication.connectionId = $stateParams.connectionId;        
+
+        $http({
+            data: vm.data,
+            method: 'POST',
+            url: '/cp/publications/'
+        }).then(function successCallback(response) {
+            swal({
+                title: "Created publication successfully!",   
+                text: "You are able to control your device remotely!",   
+                type: "success"
+            }, function(){
+                $scope.f.$setSubmitted(false);   
+                $state.go('panel.list', { connectionId: $stateParams.connectionId });          
+            });              
+        }, function errorCallback(response) {
+            swal({
+                title: "Creating publication with errors!",   
+                text: "You may entered incorrect information, please check again!",   
+                type: "error"
+            }, function(){
+                $scope.f.$setSubmitted(false);                    
+            });   
+        });   
+    };
 }]);
