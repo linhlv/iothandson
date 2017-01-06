@@ -4,6 +4,7 @@
 // get all the tools we need
 var express  		= require('express');
 var app      		= express();
+var http            = require('http').Server(app);
 var path 	 		= require('path');
 var port     		= process.env.PORT || 8080;
 var mongoose 		= require('mongoose');
@@ -14,10 +15,11 @@ var cookieParser 	= require('cookie-parser');
 var bodyParser 		= require('body-parser');
 var session 		= require('express-session');
 var validator       = require('express-validator');
-var configDB        = require('./config/database.js');
+var databaseConfig  = require('./config/database.js');
+var io              = require('socket.io')(http);
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(databaseConfig.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -42,5 +44,8 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 
 // launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);
+
+http.listen(port, function(){
+    console.log('The magic happens on port ' + port);    
+});
+
