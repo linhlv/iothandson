@@ -125,23 +125,60 @@ thingPanel.controller('panel.list.ctrl', ['$scope','$state', '$stateParams', '$h
 
     var socket = io();
 
+    var growlOptions = {
+        element: 'body',
+        type: 'inverse',
+        allow_dismiss: true,
+        placement: {
+                from: 'top',
+                align: 'center'
+        },
+        offset: {
+            x: 20,
+            y: 85
+        },
+        spacing: 10,
+        z_index: 1031,
+        delay: 2500,
+        timer: 1000,
+        url_target: '_blank',
+        mouse_over: false,
+        animate: {
+                enter: 'animated fadeIn',
+                exit: 'animated fadeOut'
+        },
+        icon_type: 'class',
+        template: '<div data-growl="container" class="alert" role="alert">' +
+                        '<button type="button" class="close" data-growl="dismiss">' +
+                            '<span aria-hidden="true">&times;</span>' +
+                            '<span class="sr-only">Close</span>' +
+                        '</button>' +
+                        '<span data-growl="icon"></span>' +
+                        '<span data-growl="title"></span>' +
+                        '<span data-growl="message"></span>' +
+                        '<a href="#" data-growl="url"></a>' +
+                    '</div>'
+    };   
+
     socket.on('mqtt_published', function(data){
         if(data.success){
-            swal({
-                title: 'MQTT published !',   
-                text: 'You published!',   
-                type: 'success'
-            }, function(){});
+            $.growl({
+                icon: 'zmdi zmdi-check zmdi-hc-fw',
+                title: ' MQTT published !',
+                message: 'You published!',
+                url: ''
+            },growlOptions);
         }else{
-            swal({
-                title: 'MQTT published !',   
-                text: data.message,   
-                type: 'error'
-            }, function(){});
+            $.growl({
+                icon: 'fa fa-comments',
+                title: ' MQTT published !',
+                message: data.message,
+                url: ''
+            },growlOptions);
         }
     });
 
-    vm.publish = function (id, value){      
+    vm.publish = function (id, value){              
         socket.emit('mqtt_publish', {
             id: id,
             value: value
